@@ -1,5 +1,0 @@
-SECRET_KEY = '6d52a22525acc498741c087951d90bf9'
-FLASK_ENV = development
-FLASK_APP = app.py
-FLASK_DEBUG = 1
-```
