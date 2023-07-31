@@ -10,17 +10,21 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(80), nullable=False)
     registration_date = db.Column(db.DateTime, nullable=False)
     insurance_id = db.Column(db.Integer, db.ForeignKey('insurance.id'))
-    insurance = db.relationship('Insurance', secondary='users', backref=db.backref('users', lazy='dynamic'))
+    appointment = db.relationship('Appointment', backref='user', lazy=True)
 
     def __repr__(self):
         return f'<User {self.insurance_id}>'
+    
 
-
-class Insurance(db.Model):
-    __tablename__ = 'insurance'
+class Appointment(db.Model):
+    __tablename__ = 'appointments'
     id = db.Column(db.Integer, primary_key=True)
-    Student_name = db.Column(db.String(80), nullable=False)
-    users = db.relationship('User', backref='insurance', lazy=True)
+    date = db.Column(db.DateTime, nullable=False)
+    insurance_id = db.Column(db.Integer, db.ForeignKey('insurance.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
 
     def __repr__(self):
-        return f'<Insurance {self.Student_name}>'
+        return f'<Appointment {self.id}>'
+
+
+
