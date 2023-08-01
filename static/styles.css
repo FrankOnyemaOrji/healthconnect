@@ -1,8 +1,11 @@
+styles--- templates
+
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 :root {
-  --primary-color:  #830f0f;
-  --primary-color-dark:#010058; 
+  --primary-color: #28bf96;
+  --primary-color-dark: #209677;
   --text-dark: #111827;
   --text-light: #6b7280;
   --white: #ffffff;
@@ -14,7 +17,7 @@
   box-sizing: border-box;
 }
 
-.btn {
+button[type="button"]{
   padding: 1rem 2rem;
   outline: none;
   border: none;
@@ -25,8 +28,7 @@
   cursor: pointer;
   transition: 0.3s;
 }
-
-.btn:hover {
+button[type="button"]:hover{
   background-color: var(--primary-color-dark);
 }
 
@@ -106,50 +108,21 @@ nav {
   isolation: isolate;
 }
 
-
-/* hero-image animation */
-@keyframes scaleAnimation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* image blob bg animatiion */
-@keyframes rotateAnimation {
-  0% {
-    transform: translate(-50%, -60%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -60%) rotate(10deg);
-  }
-}
-
-
 .image__bg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 450px;
-  width: 60vw;
+  width: 450px;
   background-color: var(--primary-color);
-  border-radius: 70%;
+  border-radius: 100%;
   z-index: -1;
-  animation: rotateAnimation 6s linear infinite; 
 }
-
 
 .image img {
   width: 100%;
-  max-width: 750px;
-  border-radius: 70px;
-  animation: scaleAnimation 2s ease-in-out infinite;
+  max-width: 475px;
 }
 
 .image__content {
@@ -226,17 +199,5 @@ nav {
 
   .image {
     grid-area: 1/1/2/2;
-  }
-
-  .image__bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    height: 20vh;
-    width: 60vw;
-    background-color: var(--primary-color);
-    border-radius: 100%;
-    z-index: -1;
   }
 }
