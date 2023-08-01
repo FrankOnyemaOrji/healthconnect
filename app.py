@@ -1,12 +1,9 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from model.models import Appointment, User
-
-
-
+from model.models import User, Appointment
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -21,16 +18,16 @@ db.init_app(app)
 # @app.before_first_request
 def create_database():
     if not os.path.exists('website/' + DB_NAME):
-        db.create_all(app=app)
+        db.create_all()
         print('Created Database!')
+
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
 
-
-#Login and Registration Routes
+# Login and Registration Routes
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -86,7 +83,8 @@ def register():
 
         password_hash = generate_password_hash(password)
 
-        new_user = User(email=email, firstname=firstname, lastname=lastname, password=password_hash, insurance_id=insurance_id)
+        new_user = User(email=email, firstname=firstname, lastname=lastname, password=password_hash,
+                        insurance_id=insurance_id)
         db.session.add(new_user)
         db.session.commit()
 
@@ -96,8 +94,7 @@ def register():
     return render_template('register.html')
 
 
-
-#Appointment Routes
+# Appointment Routes
 hospital_name = [
     'Ubuzima Polyclinic',
     'Ubuzima Polyclinic',
@@ -119,7 +116,7 @@ hospital_name = [
     'Wiwo Specialized Hospital'
     'Beatrice Polyclinic'
     'MBC HOSPITAL'
-    'Salus Polyclinic' 
+    'Salus Polyclinic'
 ]
 
 time_slots = [
@@ -195,9 +192,9 @@ date_available = [
 ]
 
 
-def is_slot_available(slot):
-    appointment = Appointment.query.filter_by(date_available=date_available, time_slots=time_slots).first()
-    if appointment:
+def is_slot_available(time_slot):
+    appointments = Appointment.query.filter_by(date_available=date_available, time_slots=time_slots).first()
+    if appointments:
         return False
     return True
 
@@ -206,39 +203,34 @@ def is_slot_available(slot):
 @login_required
 def appointment():
     if request.method == 'POST':
-        hospital_name = request.form.get('hospital_name')
-        date_available = request.form.get('date_available')
-        time_slots = request.form.get('time_slots')
+        hospitalName = request.form.get('hospital_name')
+        dateAvailable = request.form.get('date_available')
+        timeSlots = request.form.get('time_slots')
 
         if is_slot_available(time_slots):
             flash('Slot already booked. Please try another one.')
             return redirect(url_for('appointment'))
-        
-        if hospital_name == 'Select Hospital':
+
+        if hospitalName == 'Select Hospital':
             flash('Please select a hospital.')
             return redirect(url_for('appointment'))
-        
-        if date_available == 'Select Date':
+
+        if dateAvailable == 'Select Date':
             flash('Please select a date.')
             return redirect(url_for('appointment'))
-        
-        if time_slots == 'Select Time':
+
+        if timeSlots == 'Select Time':
             flash('Please select a time.')
             return redirect(url_for('appointment'))
-        
 
-        new_appointment = Appointment(hospital_name=hospital_name, date_available=date_available, time_slots=time_slots)
+        new_appointment = Appointment(hospital_name=hospitalName, date_available=dateAvailable, timeSlots=time_slots)
         db.session.add(new_appointment)
         db.session.commit()
 
         flash('Appointment created successfully.')
         return redirect(url_for('dashboard.html'))
-    
-    return render_template('appointment.html', hospital_name=hospital_name, date_available=date_available, time_slots=time_slots)
 
-
-
-
+    return render_template('dashboard.html')
 
 
 # <!-- In book_appointment.html -->
@@ -253,11 +245,11 @@ def appointment():
 # </select>
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template('500.html'), 500
+# @app.errorhandler(404)
+# def page_not_found(e):
+#     return render_template('404.html'), 404
+#
+#
+# @app.errorhandler(500)
+# def internal_server_error(e):
+#     return render_template('500.html'), 500

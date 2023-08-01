@@ -1,4 +1,4 @@
-from . import db
+from ..app import db
 from flask_login import UserMixin
 
 
@@ -25,6 +25,3 @@ class Appointment(db.Model):
 
     def __repr__(self):
         return f'<Appointment {self.id} {self.date_available} {self.time_slots}>'
-
-
-
