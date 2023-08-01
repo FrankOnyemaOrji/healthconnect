@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from model.models import User
+from model.models import Appointment, User
 
 
 
@@ -32,20 +32,10 @@ def index():
 
 
 
-
-
-
-
-
-
-
-
-
+#Login and Registration Routes
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -66,7 +56,7 @@ def login():
             flash('Account not found. Please sign up to continue')
             return redirect(url_for('register'))
 
-    return render_template('login.html')
+    return render_template('login.html', user=current_user)
 
 
 @app.route('/logout')
@@ -79,9 +69,6 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
     if request.method == 'POST':
         email = request.form.get('email')
         firstname = request.form.get('firstname')
@@ -112,3 +99,167 @@ def register():
 
 
 
+#Appointment Routes
+hospital_name = [
+    'Ubuzima Polyclinic',
+    'Ubuzima Polyclinic',
+    'Polyclinic saint Jean',
+    'Polyfam',
+    'UR-CMHS BD'
+    'Polyclinique medico sociale'
+    'olyclinique la medicale Musanze'
+    'Polyclinique la medicale Kigali'
+    'Polyclinique la medicale Rubavu'
+    "Polyclinique de l'etoile"
+    'Polyclinic du plateau'
+    'Croix du sud hospital'
+    'Peace Pololyclinic'
+    'Polyclinic du carrefour'
+    'Inkurunziza Orthopedic Hospital'
+    'Glamerc Polyclinic'
+    'Polyclinique La medicale Huye'
+    'Wiwo Specialized Hospital'
+    'Beatrice Polyclinic'
+    'MBC HOSPITAL'
+    'Salus Polyclinic' 
+]
+
+time_slots = [
+    '6:00 AM',
+    '6:30 AM',
+    '7:00 AM',
+    '7:30 AM',
+    '8:00 AM',
+    '8:30 AM',
+    '9:00 AM',
+    '9:30 AM',
+    '10:00 AM',
+    '10:30 AM',
+    '11:00 AM',
+    '11:30 AM',
+    '12:00 PM',
+    '12:30 PM',
+    '1:00 PM',
+    '1:30 PM',
+    '2:00 PM',
+    '2:30 PM',
+    '3:00 PM',
+    '3:30 PM',
+    '4:00 PM',
+    '4:30 PM',
+    '5:00 PM',
+    '5:30 PM',
+    '6:00 PM',
+    '6:30 PM',
+    '7:00 PM',
+    '7:30 PM',
+    '8:00 PM',
+    '8:30 PM',
+    '9:00 PM',
+    '9:30 PM',
+    '10:00 PM',
+    '10:30 PM',
+    '11:00 PM',
+]
+
+date_available = [
+    '2023-08-01',
+    '2023-08-02',
+    '2023-08-03',
+    '2023-08-04',
+    '2023-08-05',
+    '2023-08-06',
+    '2023-08-07',
+    '2023-08-08',
+    '2023-08-09',
+    '2023-08-10',
+    '2023-08-11',
+    '2023-08-12',
+    '2023-08-13',
+    '2023-08-14',
+    '2023-08-15',
+    '2023-08-16',
+    '2023-08-17',
+    '2023-08-18',
+    '2023-08-19',
+    '2023-08-20',
+    '2023-08-21',
+    '2023-08-22',
+    '2023-08-23',
+    '2023-08-24',
+    '2023-08-25',
+    '2023-08-26',
+    '2023-08-27',
+    '2023-08-28',
+    '2023-08-29',
+    '2023-08-30',
+    '2023-08-31',
+]
+
+
+def is_slot_available(slot):
+    appointment = Appointment.query.filter_by(date_available=date_available, time_slots=time_slots).first()
+    if appointment:
+        return False
+    return True
+
+
+@app.route('/appointment', methods=['GET', 'POST'])
+@login_required
+def appointment():
+    if request.method == 'POST':
+        hospital_name = request.form.get('hospital_name')
+        date_available = request.form.get('date_available')
+        time_slots = request.form.get('time_slots')
+
+        if is_slot_available(time_slots):
+            flash('Slot already booked. Please try another one.')
+            return redirect(url_for('appointment'))
+        
+        if hospital_name == 'Select Hospital':
+            flash('Please select a hospital.')
+            return redirect(url_for('appointment'))
+        
+        if date_available == 'Select Date':
+            flash('Please select a date.')
+            return redirect(url_for('appointment'))
+        
+        if time_slots == 'Select Time':
+            flash('Please select a time.')
+            return redirect(url_for('appointment'))
+        
+
+        new_appointment = Appointment(hospital_name=hospital_name, date_available=date_available, time_slots=time_slots)
+        db.session.add(new_appointment)
+        db.session.commit()
+
+        flash('Appointment created successfully.')
+        return redirect(url_for('dashboard.html'))
+    
+    return render_template('appointment.html', hospital_name=hospital_name, date_available=date_available, time_slots=time_slots)
+
+
+
+
+
+
+# <!-- In book_appointment.html -->
+# <select name="slot" id="slot">
+#     {% for slot in slots %}
+#         {% if is_slot_available(slot) %}
+#             <option value="{{ slot }}">{{ slot }}</option>
+#         {% else %}
+#             <option value="{{ slot }}" disabled>{{ slot }} - Booked</option>
+#         {% endif %}
+#     {% endfor %}
+# </select>
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
