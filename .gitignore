@@ -2,3 +2,5 @@
 venv/
 .env
 __pycache__/
+*.py[cod]
+models/__pycache__/
