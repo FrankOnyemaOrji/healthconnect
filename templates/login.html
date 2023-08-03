@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Animated Login Form | CodingNepal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-  </head>
-  <body>
-    <div class="center">
-      <h1>Login</h1>
-      <form method="post">
-        <div class="txt_field">
-          <input type="text" required>
-          <span></span>
-          <label>Username</label>
-        </div>
-        <div class="txt_field">
-          <input type="password" required>
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="pass">Forgot Password?</div>
-        <a href="/templates/index.html" role="button">
-            <button type="button">Login</button>
-        </a>
-        <div class="signup_link">
-          Not a member? <a href="#">Signup</a>
-        </div>
-      </form>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | HealthConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <!-- <link rel="stylesheet" href="../static/register.css"> -->
+    <div class="nav__logo"><a href="/">HConnect</a></div>
+
+
+</head>
+
+<body>
+
+    <div class="background"></div>
+    <div class="container">
+        <form class="form">
+            <p class="title">Sign into your account</p>
+            <p class="message">Login, now! </p>
+
+    
+            <label>
+                <input required="" placeholder="" type="email" class="input">
+                <span>Email</span>
+            </label>
+    
+
+            <label>
+                <input required="" placeholder="" type="password" class="input">
+                <span>Password</span>
+            </label>
+            <button class="submit">Login</button>
+            <p class="signin">Don't have an acount ? <a href="/register">Create account</a> </p>
+        </form>
+
     </div>
 
-  </body>
+</body>
+
 </html>
