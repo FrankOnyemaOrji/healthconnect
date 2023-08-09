@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/booking.css">
+    <title>Video-2</title>
+</head>
+
+<body class="main_bg">
+    <div class="form">
+        <div class="form-text">
+            <h1><span><img src="/templates/assets/art-1.png" alt=""></span>Welcome to BOOKING<span><img src="/templates/assets/art-1.png" alt=""></span></h1>
+            <p>Schedule an appointment today</p>
+        </div>
+        <div class="main-form">
+            <form action="/views22.py" method="get">
+                <div>
+                    <span>Names:</span>
+                    <input type="text" name="name" id="name" placeholder="Write your name here..." required>
+                </div>
+                <div>
+                    <span>Email:</span>
+                    <input type="email" name="name" id="name" placeholder="Write your email here..." required> 
+                </div>
+               
+                <div>
+                    <span>Time:</span>
+                    <input type="text" name="time" id="time" placeholder="Time" required>
+                </div>
+                <div>
+                    <span>Date:</span>
+                    <input type="date" name="date" id="date" placeholder="date" required>
+                </div>
+                <div>
+                    <span>Phone No:</span>
+                    <input type="number" name="number" id="number" placeholder="Write your number here..." required>
+                </div>
+                <div id="submit">
+                    <input type="submit" value="SUBMIT" id="submit">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
