@@ -6,7 +6,8 @@
 }
 
 .main_bg{
-    background-image: url(/templates/assets/background.jpg);
+    background-color: blue;
+    /* background-image: url(/templates/assets/background.jpg); */
     max-width: 1280px;
     height: 800px;
     display: flex;

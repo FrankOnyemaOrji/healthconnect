@@ -14,6 +14,18 @@ def index():  # put application's code here
     return render_template('index.html')
 
 
+@views.route('/dashboard')
+@login_required
+def dashboard():
+    pass
+
+
+@views.route('/resources')
+@login_required
+def resources():
+    pass
+
+
 @views.route('/resource')
 def resource():
     # Get the health topics from the MyHealth-finder API

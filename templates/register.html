@@ -15,40 +15,41 @@
 
     <div class="background"></div>    
     <div class="container">
-        <form class="form">
+        <form class="form" method="POST">
             <p class="title">Register your account</p>
             <p class="message">Sign up now! </p>
             <div class="flex">
                 <label>
-                    <input required="" placeholder="" type="text" class="input">
+                    <input required="" placeholder="" type="text" class="input" name="firstname">
                     <span>Firstname</span>
                 </label>
     
                 <label>
-                    <input required="" placeholder="" type="text" class="input">
+                    <input required="" placeholder="" type="text" class="input" name="lastname">
                     <span>Lastname</span>
                 </label>
             </div>
     
             <label>
-                <input required="" placeholder="" type="email" class="input">
+                <input required="" placeholder="" type="email" class="input" name="email">
                 <span>ALU student Email</span>
             </label>
     
             <label>
-                <input required="" placeholder="" type="text" class="input">
+                <input required="" placeholder="" type="text" class="input" name="insurance_id">
                 <span>Insurance number</span>
             </label>
             <label>
-                <input required="" placeholder="" type="password" class="input">
+                <input required="" placeholder="" type="text" class="input" name="phone_number">
+                <span>Phone number</span>
+            </label>
+            <label>
+                <input required="" placeholder="" type="password" class="input" name="password">
                 <span>Password</span>
             </label>
             <button class="submit">Submit</button>
-            <p class="signin">Already have an acount ? <a href="/login">Sign in</a> </p>
+            <p class="signin">Already have an account ? <a href="/login">Sign in</a> </p>
         </form>
-
     </div>
-
 </body>
-
 </html>

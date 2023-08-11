@@ -4,7 +4,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from .models.base_model import User
 from . import db
 
-
 auth = Blueprint('auth', __name__)
 
 
@@ -20,7 +19,7 @@ def login():
             if user and check_password_hash(user.password, password):
                 login_user(user)
                 flash('Logged in successfully.')
-                return redirect(url_for('index'))
+                return redirect(url_for('views.index'))
 
             if not user(user and check_password_hash(user.password, password)):
                 flash('Incorrect password, try again.')
@@ -38,7 +37,7 @@ def login():
 def logout():
     logout_user()
     flash('Logged out successfully.')
-    return redirect(url_for('index'))
+    return redirect(url_for('views.index'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -49,25 +48,24 @@ def register():
         lastname = request.form.get('lastname')
         password = request.form.get('password')
         insurance_id = request.form.get('insurance_id')
+        phone_number = request.form.get('phone_number')
 
         insurance_id_exists = User.query.filter_by(insurance_id=insurance_id).first()
-        if insurance_id_exists:
-            flash('Insurance ID already exists. Please try again.')
-            return redirect(url_for('register'))
-
         email_exists = User.query.filter_by(email=email).first()
-        if email_exists:
-            flash('Email already exists. Please try again.')
-            return redirect(url_for('register'))
 
         password_hash = generate_password_hash(password)
 
-        new_user = User(email=email, firstname=firstname, lastname=lastname, password=password_hash,
-                        insurance_id=insurance_id)
-        db.session.add(new_user)
-        db.session.commit()
+        if insurance_id_exists:
+            flash('Insurance ID already exists.')
+        elif email_exists:
+            flash('Email already exists.')
+        else:
+            new_user = User(email=email, full_name=f'{firstname} {lastname}', password=password_hash,
+                            insurance_id=insurance_id, phone_number=phone_number)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            flash('Account created successfully.')
+            return redirect(url_for('views.index'))
 
-        flash('Account created successfully.')
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
+    return render_template('register.html', user=current_user)
