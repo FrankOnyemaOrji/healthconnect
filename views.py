@@ -89,7 +89,7 @@ def appointment():
         db.session.commit()
         flash('Appointment created successfully.')
         return redirect(url_for('views.dashboard'))
-    return render_template('booking.html', user=current_user)
+    return render_template('appointment.html', user=current_user)
 
 
 @views.errorhandler(404)
