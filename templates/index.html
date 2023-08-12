@@ -13,8 +13,8 @@
           {% if current_user.is_authenticated %}
         <ul class="nav__links">
           <li class="link"><a href="{{url_for('views.index')}}">Home</a></li>
-          <li class="link"><a href=">{{url_for('views.dashboard')}}">Dashboard</a></li>
-          <li class="link"><a href=">{{url_for('views.resources')}}">Resources</a></li>
+          <li class="link"><a href="{{url_for('views.dashboard')}}">Dashboard</a></li>
+          <li class="link"><a href="{{url_for('views.resources')}}">Resources</a></li>
             <button class="btn"><a href="{{url_for('auth.logout')}}"> Log out </a></button>
           <li class="link"><a href="/"></a></li>
         </ul>
