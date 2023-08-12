@@ -22,49 +22,87 @@
       <div class="main-form">
         <form action="/views22.py" method="get">
           <div>
-            <span>Names:</span>
+            <span>Full Name:</span>
             <input
               type="text"
-              name="name"
+              name="full_name"
               id="name"
               placeholder="Write your name here..."
               required
             />
           </div>
           <div>
-            <span>Email:</span>
-            <input
-              type="email"
-              name="name"
-              id="name"
-              placeholder="Write your email here..."
-              required
-            />
+            <span>Hospital Name:</span>
+              <select placeholder="Time" id="time" name="hospital_name" required style="color: gray;">
+                  <option value="Ubuzima Polyclinic">Ubuzima Polyclinic</option>
+              <option value="Ubuzima Polyclinic">Ubuzima Polyclinic</option>
+              <option value="Polyclinic saint Jean">Polyclinic saint Jean</option>
+              <option value="Polyfam">Polyfam</option>
+              <option value="UR-CMHS BD">UR-CMHS BD</option>
+              <option value="Polyclinique medico sociale">Polyclinique medico sociale</option>
+              <option value="olyclinique la medicale Musanze">olyclinique la medicale Musanze</option>
+              <option value="Polyclinique la medicale Kigali">Polyclinique la medicale Kigali</option>
+              <option value="1Polyclinique la medicale Rubavu">Polyclinique la medicale Rubavu</option>
+              <option value="Polyclinique de l'etoile">Polyclinique de l'etoile</option>
+              <option value="Polyclinic du plateau">Polyclinic du plateau</option>
+              <option value="Croix du sud hospital">Croix du sud hospital</option>
+              <option value="Peace Pololyclinic">Peace Pololyclinic</option>
+              <option value="Polyclinic du carrefour">Polyclinic du carrefour</option>
+              <option value="Inkurunziza Orthopedic Hospital">Inkurunziza Orthopedic Hospital</option>
+              <option value="Glamerc Polyclinic">Glamerc Polyclinic</option>
+              <option value="Polyclinique La medicale Huye">Polyclinique La medicale Huye</option>
+              <option value="Wiwo Specialized Hospital">Wiwo Specialized Hospital</option>
+              <option value="Beatrice Polyclinic">Beatrice Polyclinic</option>
+              <option value="MBC HOSPITAL">MBC HOSPITAL</option>
+              <option value="Salus Polyclinic">Salus Polyclinic</option>
+            </select>
           </div>
 
           <div>
             <span>Time:</span>
-            <!-- In book_appointment.html -->
-            <select name="slot" id="slot">
-              {% for time_slots in time_slots %} {% if is_slot_available(time_slots) %}
-              <option value="{{ time_slots }}">{{ slot }}</option>
-              {% else %}
-              <option value="{{ time_slots }}" disabled>{{ slot }} - Booked</option>
-              {% endif %} {% endfor %}
+            <select placeholder="Time" id="time" name="appointment_time" required style="color: gray;">
+              <option value="6am">6 AM</option>
+              <option value="6am">6:30AM</option>
+              <option value="7am">7 AM</option>
+              <option value="6am">7:30AM</option>
+              <option value="8am">8 AM</option>
+              <option value="6am">8:30AM</option>
+              <option value="9am">9 AM</option>
+              <option value="6am">9:30AM</option>
+              <option value="10am">10 AM</option>
+              <option value="6am">10:30AM</option>
+              <option value="11am">11 AM</option>
+              <option value="6am">11:30AM</option>
+              <option value="12pm">12 PM</option>
+              <option value="6am">12:30PM</option>
+              <option value="1pm">1 PM</option>
+              <option value="6am">1:30PM</option>
+              <option value="2pm">2 PM</option>
+              <option value="6am">2:30PM</option>
+              <option value="3pm">3 PM</option>
+              <option value="6am">3:30PM</option>
+              <option value="4pm">4 PM</option>
+              <option value="6am">4:30PM</option>
+              <option value="5pm">5 PM</option>
+              <option value="6am">5:30PM</option>
+              <option value="6pm">6 PM</option>
+              <option value="6am">6:30PM</option>
+              <option value="7pm">7 PM</option>
+              <option value="6am">7:30PM</option>
+              <option value="8pm">8 PM</option>
+              <option value="6am">8:30PM</option>
+              <option value="9pm">9 PM</option>
+              <option value="6am">9:30PM</option>
+              <option value="10pm">10 PM</option>
+              <option value="6am">10:30PM</option>
+              <option value="11pm">11 PM</option>
             </select>
-            <!-- <input
-              type="text"
-              name="time"
-              id="time"
-              placeholder="Time"
-              required
-            /> -->
           </div>
           <div>
             <span>Date:</span>
             <input
               type="date"
-              name="date"
+              name="appointment_date"
               id="date"
               placeholder="date"
               required
@@ -74,11 +112,20 @@
             <span>Phone No:</span>
             <input
               type="number"
-              name="number"
+              name="phone_number"
               id="number"
               placeholder="Write your number here..."
               required
             />
+            <div>
+              <span>Note For Doctor</span>
+              <textarea
+                name="note"
+                id="note"
+                cols="30"
+                rows="10"
+                placeholder="Write your note here..." required></textarea>
+            </div>
           </div>
           <div id="submit">
             <input type="submit" value="SUBMIT" id="submit" />
