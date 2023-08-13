@@ -8,6 +8,11 @@
 
 </head>
 <body>
+    <nav class="top-nav">
+        <button class="back-button"> <a href="{{url_for('views.index')}}">Home</a></button>
+        <a href="{{url_for('views.appointment')}}">Book Appointment</a>
+        <a href="{{url_for('views.resource')}}">Resources</a>
+    </nav>
     <div class="country-dropdown">
         <label for="country">Choose a Country:</label>
         <select id="country" autocomplete="off">
