@@ -17,7 +17,7 @@ def index():  # put application's code here
 @views.route('/dashboard')
 @login_required
 def dashboard():
-    pass
+    return render_template("dashboard.html")
 
 
 @views.route('/resource')
