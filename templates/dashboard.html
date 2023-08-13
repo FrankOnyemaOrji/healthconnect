@@ -15,7 +15,7 @@
     <section class="profile">
         <h1>Profile</h1>
         <div class="profile__info">
-            <h1>FullName: {{current_user.firstname}} {{current_user.lastname}}</h1>
+            <h1>FullName: {{current_user.full_name}}</h1>
             <p> Email: {{current_user.email}}</p>
             <p> Phone Number: {{current_user.phone_number}}</p>
             <p>Insurance Number: {{current_user.insurance_id}}</p>
@@ -29,11 +29,11 @@
             {% for appointment in appointments %}
             <div class="appointment">
                 <h2>Name: {{appointment.full_name}}</h2>
-                <p>Date: {{appointment.date}}</p>
-                <p>Time: {{appointment.time}}</p>
+                <p>Date: {{appointment.appointment_date}}</p>
+                <p>Time: {{appointment.appointment_time}}</p>
                 <p>Hospital: {{appointment.hospital_name}}</p>
-                <p>Phone Number: {{appointment.phone}}</p>
-                <h4>Notes: {{appointment.notes}}</h4>
+                <p>Phone Number: {{appointment.phone_number}}</p>
+                <h4>Notes: {{appointment.note}}</h4>
 
 
             </div>
