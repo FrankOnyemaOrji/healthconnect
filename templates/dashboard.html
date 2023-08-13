@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Health News</title>
+    <link rel="stylesheet" href="/static/dashboard.css" />
+
 </head>
 <body>
+    <nav class="top-nav">
+        <button class="back-button"> <a href="{{url_for('views.index')}}">Home</a></button>
+        <a href="{{url_for('views.appointment')}}">Book Appointment</a>
+        <a href="{{url_for('views.resource')}}">Resources</a>
+    </nav>
+    
+    <section class="profile">
+        <h1>Profile</h1>
+        <div class="profile__info">
+            <h1>FullName: {{current_user.full_name}}</h1>
+            <p> Email: {{current_user.email}}</p>
+            <p> Phone Number: {{current_user.phone_number}}</p>
+            <p>Insurance Number: {{current_user.insurance_id}}</p>
+        </div>
 
+    </section>
+    <hr>
+    <section class="appointments">
+        <h1>Appointments</h1>
+        <div class="appointments__container">
+            {% for appointment in appointments %}
+            <div class="appointment">
+                <h2>Name: {{appointment.full_name}}</h2>
+                <p>Date: {{appointment.appointment_date}}</p>
+                <p>Time: {{appointment.appointment_time}}</p>
+                <p>Hospital: {{appointment.hospital_name}}</p>
+                <p>Phone Number: {{appointment.phone_number}}</p>
+                <h4>Notes: {{appointment.note}}</h4>
+
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+  
 </body>
 </html>

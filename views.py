@@ -11,13 +11,15 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def index():  # put application's code here
-    return render_template('index.html')
+    appointments = Appointment.query.all()
+    return render_template('index.html', user=current_user, appointments=appointments)
 
 
 @views.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    appointments = Appointment.query.filter_by(student=current_user).all()
+    return render_template("dashboard.html", appointments=appointments)
 
 
 @views.route('/resource')

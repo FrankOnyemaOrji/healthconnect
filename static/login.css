@@ -8,38 +8,21 @@ body {
   background-position: center;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: url("https://www.alueducation.com/wp-content/uploads/2023/03/alu-banners-s1-f-min.png");
-  background-size: cover;
-  background-position: center;
-  filter: blur(7px);
-}
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.nav__logo {
-  min-height: 100vh;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color:rgb(56, 90, 194);
 
 }
+
+
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 400px;
+  max-width:500px;
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -47,7 +30,7 @@ body {
 
 .title {
   font-size: 28px;
-  color: royalblue;
+  color: #830f0f;
   font-weight: 600;
   letter-spacing: -1px;
   position: relative;
@@ -63,13 +46,13 @@ body {
   width: 16px;
   border-radius: 50%;
   left: 0px;
-  background-color: royalblue;
+  background-color: #010058;
 }
 
 .title::before {
   width: 18px;
   height: 18px;
-  background-color: royalblue;
+  background-color: #010058;
 }
 
 .title::after {
@@ -80,7 +63,7 @@ body {
 
 .message, .signin {
   font-weight: 600;
-  color: royalblue;
+  color: #010058;
   font-size: 14px;
 }
 
@@ -89,17 +72,17 @@ body {
 }
 
 .signin a {
-  color: #f8f6f6;
+  color: #830f0f;
 }
 
 .signin a:hover {
-  text-decoration: underline royalblue;
+  text-decoration: underline #830f0f;
 }
 
 .flex {
   display: flex;
   width: 100%;
-  gap: 35px;
+  gap: 50px;
 }
 
 .form label {
@@ -142,7 +125,7 @@ body {
 .submit {
   border: none;
   outline: none;
-  background-color: royalblue;
+  background-color: #010058;
   padding: 10px;
   border-radius: 10px;
   color: #fff;
