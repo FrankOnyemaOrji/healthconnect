@@ -20,20 +20,10 @@ def dashboard():
     pass
 
 
-@views.route('/resources')
-@login_required
-def resources():
-    pass
-
-
 @views.route('/resource')
 def resource():
-    # Get the health topics from the MyHealth-finder API
-    response = requests.get("https://api.myhealthfinder.gov/v2/topics")
-    topics = response.json()
-
     # Render the HTML template with the health topics
-    return render_template("resources.html", topics=topics)
+    return render_template("resources.html")
 
 
 def is_appointment_date_available(appointment_date):

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/booking.css" />
+    <link rel="stylesheet" href="/static/appointment.css" />
     <title>Video-2</title>
   </head>
 
@@ -134,4 +134,77 @@
       </div>
     </div>
   </body>
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/static/appointment.css"/>
+    <title>Appointment | HealthConnect</title>
+</head>
+<body class="main_bg">
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="home-button">Home</a>
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Resources</a>
+  </div>
+</nav>
+<div class="form">
+    <div class="form-text">
+        <h1>
+            Welcome to BOOKING
+        </h1>
+        <p>Schedule an appointment today</p>
+    </div>
+    <div class="main-form">
+        <form action="/views22.py" method="get">
+            <div>
+                <span>Full Name:</span>
+                <input type="text" name="full_name" id="name" placeholder="Write your name here..." required/>
+            </div>
+            <div>
+                <span>Hospital Name:</span>
+                <select placeholder="Time" id="time" name="hospital_name" required style="color: gray;">
+                    <option value="Ubuzima Polyclinic">Ubuzima Polyclinic</option>
+                    <!-- Add more options here -->
+                </select>
+            </div>
+            <div>
+                <span>Time:</span>
+                <select placeholder="Time" id="time" name="appointment_time" required style="color: gray;">
+                    <option value="6am">6 AM</option>
+                    <!-- Add more options here -->
+                </select>
+            </div>
+            <div>
+                <span>Date:</span>
+                <input type="date" name="appointment_date" id="date" placeholder="date" required/>
+            </div>
+            <div>
+                <span>Phone No:</span>
+                <input type="number" name="phone_number" id="number" placeholder="Write your number here..." required/>
+                <div>
+                    <span>Note For Doctor</span>
+                    <textarea name="note" id="note" cols="30" rows="10" placeholder="Write your note here..."
+                              required></textarea>
+                </div>
+            </div>
+            <div id="submit">
+                <input type="submit" value="SUBMIT" id="submit"/>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
 </html>
