@@ -7,11 +7,6 @@
 
 </head>
 <body>
-    <nav class="top-nav">
-        <button class="back-button" onclick="goBack()">Home</button>
-        <a href="#health-news">Health News</a>
-        <a href="#emergency-contacts">Emergency Contacts</a>
-    </nav>
     <div class="country-dropdown">
         <label for="country">Choose a Country:</label>
         <select id="country" autocomplete="off">
@@ -31,125 +26,10 @@
     </div>
     <button id="fetchButton">Fetch Health News</button>
 
-
-
-    <!-- Emergency cintacts -->
-    <section id="emergency-contacts" class="emergency-contacts-modal hidden">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Health Emergency Contacts</h2>
-            <label for="emergency-country">Select a Country:</label>
-            <select id="emergency-country">
-                <option value="rw">Rwanda</option>
-                <option value="ke">Kenya</option>
-                <option value="ng">Nigeria</option>
-                <option value="ug">Uganda</option>
-                <option value="et">Ethiopia</option>
-            </select>
-            <div class="emergency-contacts-container">
-                <!-- Emergency contacts content will be added here -->
-            </div>
-        </div>
-    </section>
-    
-
     <script>
             document.addEventListener("DOMContentLoaded", () => {
     const countryDropdown = document.getElementById("country");
     const newsContainer = document.getElementById("newsContainer");
-    const emergencyContactsModal = document.getElementById("emergency-contacts");
-    const emergencyCountryDropdown = document.getElementById("emergency-country");
-    const emergencyContactsContainer = document.querySelector(".emergency-contacts-container");
-
-    // Add a click event listener to the "Health Emergency Contacts" link
-    const emergencyContactsLink = document.querySelector('a[href="#emergency-contacts"]');
-    emergencyContactsLink.addEventListener("click", () => {
-        // Show the emergency contacts modal
-        emergencyContactsModal.classList.remove("hidden");
-    });
-
-    // Close the modal when the close button is clicked
-    const closeButton = document.querySelector(".close-button");
-    closeButton.addEventListener("click", () => {
-        emergencyContactsModal.classList.add("hidden");
-    });
-
-    // Populate emergency contacts based on the selected country
-    emergencyCountryDropdown.addEventListener("change", () => {
-        const selectedCountry = emergencyCountryDropdown.value;
-        if (selectedCountry in emergencyContactsData) {
-            const contacts = emergencyContactsData[selectedCountry];
-            updateEmergencyContacts(contacts);
-        }
-    });
-
-    function updateEmergencyContacts(contacts) {
-        emergencyContactsContainer.innerHTML = `
-            <h3>Police Emergency Contacts</h3>
-            <p><strong>Police Contacts:</strong> ${contacts.police}</p>
-            <p><strong>Police Website:</strong> <a href="${contacts.policeWebsite}" target="_blank">Police Website</a></p>
-            <h3>Hospitals Emergency Contacts</h3>
-            <p><strong>Hospital Contacts:</strong> ${contacts.hospital}</p>
-            <p><strong>Hospital Website:</strong> <a href="${contacts.hospitalWebsite}" target="_blank">Hospital Website</a></p>
-        `;
-    }
-
-    // Map of countries to emergency contacts data (replace with actual data)
-    const emergencyContactsData = {
-        rw: {
-            police: "112",
-            policeWebsite: "https://www.rnp.gov.rw/",
-            hospital: "114",
-            hospitalWebsite: "https://www.moh.gov.rw/"
-        },
-        ke: {
-            police: "999",
-            policeWebsite: "https://www.nationalpolice.go.ke/",
-            hospital: "020-2726300",
-            hospitalWebsite: "https://www.health.go.ke/"
-        },
-        ng: {
-            police: "112",
-            policeWebsite: "https://www.lagosstatepolice.gov.ng/",
-            hospital: "0803-123-4567",
-            hospitalWebsite: "https://www.lsha.gov.ng/"
-        },
-        ug: {
-            police: "999",
-            policeWebsite: "https://www.upf.go.ug/",
-            hospital: "999",
-            hospitalWebsite: "https://www.health.go.ug/"
-        },
-        et: {
-            police: "991",
-            policeWebsite: "https://www.federalpolice.gov.et/",
-            hospital: "907",
-            hospitalWebsite: "https://www.moh.gov.et/"
-        }
-    };
-
-    countryDropdown.addEventListener("change", () => {
-        const selectedCountry = countryDropdown.value;
-        if (selectedCountry in emergencyContactsData) {
-            const contacts = emergencyContactsData[selectedCountry];
-            updateEmergencyContacts(contacts);
-        }
-    });
-
-    function updateEmergencyContacts(contacts) {
-        const contactsContainer = document.getElementById("emergency-contacts-container");
-        contactsContainer.innerHTML = `
-            <h3>Police Emergency Contacts</h3>
-            <p><strong>Police Contacts:</strong> ${contacts.police}</p>
-            <p><strong>Police Website:</strong> <a href="${contacts.policeWebsite}" target="_blank">Police Website</a></p>
-            <h3>Hospitals Emergency Contacts</h3>
-            <p><strong>Hospital Contacts:</strong> ${contacts.hospital}</p>
-            <p><strong>Hospital Website:</strong> <a href="${contacts.hospitalWebsite}" target="_blank">Hospital Website</a></p>
-        `;
-    }
-
-
-
 
     countryDropdown.addEventListener("change", () => {
         const selectedCountry = countryDropdown.value;
@@ -163,7 +43,7 @@
                     // Clear existing content
                     newsContainer.innerHTML = "";
 
-                    // Create columns for each news article
+                    // Creates columns for each news article
                     data.articles.forEach(article => {
                         const title = article.title;
                         const description = article.description;
@@ -188,7 +68,7 @@
             <h3>${title}</h3>
             <p>${description}</p>
             <p>Source: ${source}</p>
-            <a href="${url}" target="_blank">Read More</a>
+            <p><a href="${url}" target="_blank"><span>Read</span> More</a></p>
         `;
         return newsElement;
     }
