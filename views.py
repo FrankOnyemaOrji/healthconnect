@@ -25,7 +25,51 @@ def dashboard():
 @views.route('/resource')
 def resource():
     # Render the HTML template with the health topics
-    return render_template("resources.html")
+    selected_country = "ng"  # Replace with the desired country code
+    news_articles = fetch_health_news(selected_country)
+    return render_template('resources.html', news_articles=news_articles)
+import requests
+
+def fetch_health_news(selected_country):
+    api_key = "9ea9960aac454f649e6fa5d78e9343be"
+    api_url = f"https://newsapi.org/v2/top-headlines?category=health&country={selected_country}&apiKey={api_key}"
+
+    try:
+        response = requests.get(api_url)
+        data = response.json()
+
+        news_articles = []
+
+        for article in data.get("articles", []):
+            title = article.get("title", "")
+            description = article.get("description", "")
+            source = article.get("source", {}).get("name", "")
+            url = article.get("url", "")
+
+            news_articles.append({
+                "title": title,
+                "description": description,
+                "source": source,
+                "url": url
+            })
+
+        return news_articles
+
+    except Exception as e:
+        print("Error fetching data:", e)
+        return []
+
+# selected_country = "ng" 
+# news_articles = fetch_health_news(selected_country)
+
+# for article in news_articles:
+#     print("Title:", article["title"])
+#     print("Description:", article["description"])
+#     print("Source:", article["source"])
+#     print("URL:", article["url"])
+#     print("\n")
+
+
 
 
 def is_appointment_date_available(appointment_date):

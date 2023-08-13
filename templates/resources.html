@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Health News</title>
-    <link rel="stylesheet" href="/static/resources.css" />
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='resources.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='resources.css') }}">
 
 </head>
 <body>
@@ -23,15 +22,18 @@
         </select>
     </div>
     <div id="newsContainer">
-        <div class="columns">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
+        {% for article in news_articles %}
+        <div class="news-article">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <p>Source: {{ article.source }}</p>
+            <p><a href="{{ article.url }}" target="_blank"><span>Read</span> More</a></p>
         </div>
+        {% endfor %}
     </div>
     <button id="fetchButton">Fetch Health News</button>
 
-    <script>
+    <!-- <script>
             document.addEventListener("DOMContentLoaded", () => {
     const countryDropdown = document.getElementById("country");
     const newsContainer = document.getElementById("newsContainer");
@@ -80,6 +82,6 @@
 });
 
 
-    </script>
+    </script> -->
 </body>
 </html>

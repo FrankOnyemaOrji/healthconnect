@@ -98,6 +98,10 @@ a {
     padding: 10px;
     z-index: 1000;
 }
+.top-nav a {
+    color: white;
+    text-decoration: none;
+}
 
 .nav-links {
     display: flex;
