@@ -24,13 +24,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migration = Migrate(app, db)
 
-from .views import views
-from .auth import auth
+from views import views
+from auth import auth
 
 app.register_blueprint(views, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
 
-from .models.base_model import User
+
+from models.base_model import User
 
 with app.app_context():
     db.create_all()

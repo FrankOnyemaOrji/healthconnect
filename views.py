@@ -2,9 +2,9 @@ from flask import Blueprint, render_template, redirect, url_for
 import requests
 from flask import request, flash
 from flask_login import login_required, current_user
-from . import db
+from create_app import db
 
-from .models.base_model import Appointment
+from models.base_model import Appointment
 
 views = Blueprint('views', __name__)
 
