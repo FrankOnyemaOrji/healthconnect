@@ -28,7 +28,10 @@ def resource():
     selected_country = "ng"  # Replace with the desired country code
     news_articles = fetch_health_news(selected_country)
     return render_template('resources.html', news_articles=news_articles)
+
+
 import requests
+
 
 def fetch_health_news(selected_country):
     api_key = "9ea9960aac454f649e6fa5d78e9343be"
@@ -59,7 +62,8 @@ def fetch_health_news(selected_country):
         print("Error fetching data:", e)
         return []
 
-# selected_country = "ng" 
+
+# selected_country = "ng"
 # news_articles = fetch_health_news(selected_country)
 
 # for article in news_articles:
@@ -68,8 +72,6 @@ def fetch_health_news(selected_country):
 #     print("Source:", article["source"])
 #     print("URL:", article["url"])
 #     print("\n")
-
-
 
 
 def is_appointment_date_available(appointment_date):
@@ -119,7 +121,8 @@ def appointment():
                 return redirect(url_for('views.appointment'))
 
         appointment_id = Appointment(full_name=full_name, note=note, phone_number=phone_number,
-                                     appointment_date=appointment_date, appointment_time=appointment_time,hospital_name=hospital_name,
+                                     appointment_date=appointment_date, appointment_time=appointment_time,
+                                     hospital_name=hospital_name,
                                      student=current_user)
         db.session.add(appointment_id)
         db.session.commit()
